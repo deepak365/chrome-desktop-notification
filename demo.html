@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Chrome Desktop notification example</title>
+
+<script>
+function notify() {
+  var havePermission = window.webkitNotifications.checkPermission();
+  if (havePermission == 0) {
+    // 0 is PERMISSION_ALLOWED
+    var notification = window.webkitNotifications.createNotification(
+      'http://deluge-torrent.org/images/ubuntu-logo.png',
+      'Chrome notification!',
+      'Click here to go the website'
+    );
+
+    notification.onclick = function () {
+      window.open("http://www.ubuntu.com");
+      notification.close();
+    }
+    notification.show();
+  } else {
+      window.webkitNotifications.requestPermission();
+  }
+}
+
+</script>
+</head>
+
+<body>
+<input type="button" value="Click here to get desktop notification" onclick="notify()" />
+</body>
+</html>
